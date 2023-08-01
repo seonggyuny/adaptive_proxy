@@ -53,7 +53,7 @@ class ProxyHead(BaseDecodeHead):
     def forward_affinity(self, x1,x2,x3,x4,x5):
         self._device = x1.device
         B, C, H, W = x1.shape
-       
+        # this code refers from https://github.com/pzhren/dw-vit
         feats_s = torch.cat([x1,x2,x3,x4,x5], dim = 1)
         feats_s = feats_s.reshape(B, H, W, 5 * C) # B 3C H W
         feats_s1 = self.mlp_input(feats_s)
